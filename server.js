@@ -7,21 +7,28 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const routes = require('./routes');
+const path = require('path');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 
 // -------------------------- Define middleware here -------------------------- //
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/*'));
+  app.use(express.static('client/build'));
+
+  app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
+
+
 // add routes, both API and view
-app.use(routes);
+app.use('/', routes);
 
 // a special area of the session used for storing messages
 app.use(flash());
