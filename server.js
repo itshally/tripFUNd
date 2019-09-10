@@ -13,7 +13,7 @@ const app = express();
 
 
 // -------------------------- Define middleware here -------------------------- //
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // serve up static assets (usually on heroku)
@@ -24,8 +24,6 @@ if (process.env.NODE_ENV === 'production') {
     response.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
-
-
 
 // add routes, both API and view
 app.use('/', routes);
@@ -48,7 +46,13 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tripfund');
+//processing the database connection
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+  mongoose.connect("mongodb://localhost/tripfund", { useNewUrlParser: true });
+};
 
 // start the API serverd  
 app.listen(PORT, function() {
