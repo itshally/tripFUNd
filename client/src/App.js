@@ -1,26 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './styles/foundation.min.css';
+import './styles/custom.css';
+import Routes from './routes';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import MobileHeader from './components/MobileHeader/MobileHeader';
 
-function App() {
+class App extends Component {
+
+  constructor(props){
+     super(props);
+     this.state={
+     appName: "Banana Project"
+    }
+   }
+
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="off-canvas-wrapper">
+    <div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+    <div className="off-canvas-content" data-off-canvas-content>
     </div>
-  );
+    </div>
+    </div>
+ );
 }
-
+}
 export default App;
