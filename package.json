@@ -22,7 +22,6 @@
   "bugs": {
     "url": "https://github.com/itshally/tripFUNd/issues"
   },
-  "homepage": "https://github.com/itshally/tripFUNd#readme",
   "dependencies": {
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
