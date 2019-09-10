@@ -21,17 +21,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // add routes, both API and view
-// app.use(routes);
+app.use(routes);
 
 // a special area of the session used for storing messages
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // -------------------------- Configure Passport/Possport-Local -------------------------- //
 // requires the model with Passport-Local Mongoose plugged in
-const User = require('./models/user');
+const User = require('./models/User');
 
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
@@ -42,7 +41,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // connect to the Mongo DB
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tripfund');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tripfund');
 
 // start the API serverd  
 app.listen(PORT, function() {
