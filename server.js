@@ -40,7 +40,7 @@ passport.deserializeUser(db.User.deserializeUser());
 
 
 // use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(db.User.authenticate()));
 
 
 
