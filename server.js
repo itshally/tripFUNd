@@ -10,9 +10,7 @@ const routes = require('./routes');
 const path = require('path');
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-// requires the model with Passport-Local Mongoose plugged in
-const User = require('./models/User.js');
+const db = require('./models');
 
 
 // -------------------------- Define middleware here -------------------------- //
@@ -33,10 +31,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // -------------------------- Configure Passport/Possport-Local -------------------------- //
+// requires the model with Passport-Local Mongoose plugged in
+// const User = require('./models/User.js');
 
 // use static serialize and deserialize of model for passport session support
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 
 // use static authenticate method of model in LocalStrategy
