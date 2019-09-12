@@ -31,7 +31,7 @@ app.use(passport.session());
 
 // -------------------------- Configure Passport/Possport-Local -------------------------- //
 // requires the model with Passport-Local Mongoose plugged in
-const User = require('./models/User.js');
+const User = require('./models/user.js');
 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
