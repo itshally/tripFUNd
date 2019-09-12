@@ -7,7 +7,8 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const routes = require('./routes');
-const PORT = process.env.PORT || 3001;
+const path = require('path');
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 
@@ -17,11 +18,17 @@ app.use(express.json());
 
 // serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/*'));
+  // app.use(express.static('client/build'));
+  // Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+  app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
 // add routes, both API and view
-app.use(routes);
+app.use('/', routes);
 
 // a special area of the session used for storing messages
 app.use(flash());
@@ -41,7 +48,13 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tripfund');
+//processing the database connection
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+  mongoose.connect("mongodb://localhost/tripfund", { useNewUrlParser: true });
+};
 
 // start the API serverd  
 app.listen(PORT, function() {

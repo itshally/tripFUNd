@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
@@ -22,7 +23,6 @@
   "bugs": {
     "url": "https://github.com/itshally/tripFUNd/issues"
   },
-  "homepage": "https://github.com/itshally/tripFUNd#readme",
   "dependencies": {
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
