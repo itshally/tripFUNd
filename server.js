@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // requires the model with Passport-Local Mongoose plugged in
-const User = require('./models/User');
+const User = require('./models/User.js');
 
 
 // -------------------------- Define middleware here -------------------------- //
