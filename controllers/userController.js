@@ -5,10 +5,9 @@ const db = require('../models');
 module.exports = {
      createNewUser: (request, response) => {
           db.User
-               // .create(request.body)
                .create(
-                     {username: request.params.username},
-                     {password: request.params.password})
+                     {username: request.body.username},
+                     {password: request.body.password})
                .then(dbUser => response.json(dbUser))
                .catch(error => response.status(422).json(error));
           },
