@@ -18,7 +18,13 @@ module.exports = {
      findUser: (request, response) => {
           db.User
                .findOne({_id: request.params.id})
-               .then()
+               .then(dbUser => response.json(dbUser))
+               .catch(error => response.status(422).json(error));
+     },
+     userAuthentication: (request, response) => {
+          db.User
+               .find({'username' : request.body.username})
+               .then(dbUser => response.json(dbUser))
                .catch(error => response.status(422).json(error));
      }
 } 
