@@ -1,12 +1,41 @@
+/* global document, alert */
+import './shims.js';
+
+//import 'core-js/es6/map';
+//import 'core-js/es6/set';
+import 'core-js/es/array';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactSignupLoginComponent from './components/ReactSignupLoginComponent';
+
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import tlogo from './assets/tlogo.png';
+
+const App = () => {
+  const signupWasClickedCallback = (data) => {
+    console.log(data);
+    alert('Signup callback, see log on the console to see the data.');
+  };
+  const loginWasClickedCallback = (data) => {
+    console.log(data);
+    alert('Login callback, see log on the console to see the data.');
+  };
+  const recoverPasswordWasClickedCallback = (data) => {
+    console.log(data);
+    alert('Recover password callback, see log on the console to see the data.');
+  };
+  return (
+<div className="loginWrapper">
+      <ReactSignupLoginComponent
+        title="tripFUNd" logo={tlogo}
+        handleSignup={signupWasClickedCallback}
+        handleLogin={loginWasClickedCallback}
+        handleRecoverPassword={recoverPasswordWasClickedCallback}
+      />
+    </div>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+export default App;
