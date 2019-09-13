@@ -5,6 +5,8 @@ import Login from './Login';
 import Signup from './Signup';
 import RecoverPassword from './RecoverPassword';
 
+import CreateUser from '../utils/API';
+
 // Our only css dependency
 import './normalize.css';
 import { isAbsolute } from 'path';
@@ -31,11 +33,31 @@ class ReactSignupLoginComponent extends React.Component {
   }
 
   bubleUpSignup() {
-    this.props.handleSignup({
-      username: this.state.username,
-      password: this.state.password,
-      passwordConfirmation: this.state.passwordConfirmation,
-    });
+    //checks if the password and the confirm password match
+    if(this.state.password == this.state.passwordConfirmation){
+      this.props.handleSignup({
+        username: this.state.username,
+        password: this.state.password
+      });
+      
+      var data = {
+        username : this.state.username,
+        password : this.state.password
+      }
+      //must save to the database
+      CreateUser.createUser(data)
+        .then(respone => {
+          respone.data.password = this.props.handleSignup({
+            password: this.state.password
+          });
+          respone.data.username = this.props.handleSignup({
+            password: this.state.password
+          });
+        });
+    }else{
+      alert('not match')
+    }
+    
   }
 
   bubleUpLogin() {

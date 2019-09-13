@@ -15,13 +15,13 @@ storiesOf('React signup login component', module)
       }}
       handleLogin={data => {
         console.log(data);
-        alert('Login callback, see log on the console to see the data.');
+        // alert('Login callback, see log on the console to see the data.');
       }}
       handleRecoverPassword={data => {
         console.log(data);
-        alert(
-          'Recover password callback, see log on the console to see the data.'
-        );
+        // alert(
+        //   'Recover password callback, see log on the console to see the data.'
+        // );
       }}
     />
   ))
