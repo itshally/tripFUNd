@@ -3,6 +3,9 @@ const router = require("express").Router();
 const apiRoutes = require("./api");
 
 // API Routes
+
+//able to display api
+//http://localhost:3000/api/users
 router.use("/api", apiRoutes);
 
 // If no API routes are hit, send the React app

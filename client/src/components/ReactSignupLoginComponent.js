@@ -5,7 +5,8 @@ import Login from './Login';
 import Signup from './Signup';
 import RecoverPassword from './RecoverPassword';
 
-import CreateUser from '../utils/API';
+import User from '../utils/API';
+
 
 // Our only css dependency
 import './normalize.css';
@@ -35,22 +36,22 @@ class ReactSignupLoginComponent extends React.Component {
   bubleUpSignup() {
     //checks if the password and the confirm password match
     if(this.state.password == this.state.passwordConfirmation){
-      this.props.handleSignup({
-        username: this.state.username,
-        password: this.state.password
-      });
+      // this.props.handleSignup({
+      //   username: this.state.username,
+      //   password: this.state.password
+      // });
       
       var data = {
         username : this.state.username,
         password : this.state.password
       }
       //must save to the database
-      CreateUser.createUser(data)
-        .then(respone => {
-          respone.data.password = this.props.handleSignup({
-            password: this.state.password
+      User.findUser(data)
+        .then(response => {
+          response.data.username = this.props.handleSignup({
+            username: this.state.username
           });
-          respone.data.username = this.props.handleSignup({
+          response.data.password = this.props.handleSignup({
             password: this.state.password
           });
         });
@@ -61,16 +62,25 @@ class ReactSignupLoginComponent extends React.Component {
   }
 
   bubleUpLogin() {
-    this.props.handleLogin({
+  //  var log = {
+  //     username: this.props.handleLogin({
+  //       username: this.state.username
+  //     }),
+  //     password: this.props.handleLogin({
+  //       password: this.state.password
+  //     })
+  //   };
+    var log = this.props.handleLogin({
       username: this.state.username,
-      password: this.state.password,
-    });
-  }
+      password: this.state.password
+      
+    })
 
-  bubleUpRecoverPassword() {
-    this.props.handleRecoverPassword({
-      username: this.state.username,
-    });
+    User.userAuthentication(log)
+      .then(response => {
+        console.log(response)
+        response.redirect('/home');
+      });
   }
 
   bubleUpRecoverPassword() {
@@ -88,7 +98,6 @@ class ReactSignupLoginComponent extends React.Component {
         margin: 10,
         padding: 20,
         maxWidth: '600px',
-
         width: 500,
         height: 400,
         perspective: 1000,
