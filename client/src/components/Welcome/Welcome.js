@@ -10,7 +10,7 @@ return (
         <br></br>
         <br></br>
         <br></br>
-        <a href="#" id="add-btn">Sign up Now</a>
+        <a href="/" id="add-btn">Sign up Now</a>
     </div>
 </div>
 );

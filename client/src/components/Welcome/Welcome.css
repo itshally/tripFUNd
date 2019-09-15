@@ -58,4 +58,7 @@ body,html{
     75%{
         background-image:url(../images/4.png);
     }
+    100%{
+        background-image:url(../../img/city.jpg);
+    }
 }

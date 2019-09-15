@@ -93,6 +93,7 @@ const Login = ({
       </div>
       <button
         id="signup-button"
+        className="form-btn"
         type="button"
         href="/signup"
         style={Object.assign({}, localStyles.button, styles.button)}
@@ -104,6 +105,7 @@ const Login = ({
       </button>
       <a href="/home"><input
         id="submit-login"
+        className="form-btn"
         name="submit-login"
         value="Login"
         type="submit"

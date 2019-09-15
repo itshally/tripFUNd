@@ -84,6 +84,7 @@ const Signup = ({
     <div style={Object.assign({}, localStyles.buttonsWrapper, styles.buttonsWrapper)}>
       <button
         id="login-button"
+        className="form-btn"
         type="button"
         style={Object.assign({}, localStyles.button, styles.button)}
         onClick={() => {
@@ -95,6 +96,7 @@ const Signup = ({
       <input
         id="submit-signup"
         type="submit"
+        className="form-btn"
         value={submitSignupCustomLabel}
         style={Object.assign({}, localStyles.button, styles.button)}
         onClick={handleSignup}

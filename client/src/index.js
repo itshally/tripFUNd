@@ -7,6 +7,7 @@ import 'core-js/es/array';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactSignupLoginComponent from './components/ReactSignupLoginComponent';
+import Welcome from './components/Welcome/Welcome';
 
 import './index.css';
 import tlogo from './assets/tlogo.png';
@@ -26,6 +27,7 @@ const App = () => {
   };
   return (
 <div className="loginWrapper">
+  {/* <Welcome></Welcome> */}
       <ReactSignupLoginComponent
         title="tripFUNd" logo={tlogo}
         handleSignup={signupWasClickedCallback}

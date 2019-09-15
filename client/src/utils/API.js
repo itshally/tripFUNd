@@ -5,7 +5,10 @@ export default {
      createUser : (user) => {
           return axios.post('/api/user', user);
      },
-     findAllUser : (user) => {
+     findUser : (user) => {
           return axios.get('api/user', user);
+     },
+     userAuthentication : (user) => {
+          return axios.post('api/user/login', user);
      }
 }

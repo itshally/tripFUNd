@@ -9,10 +9,14 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-image: url("../src/img/city.jpg");
-  background-attachment: fixed;
-  background-size: cover;
+  /* background-image: url("../src/img/city.jpg"); */
+  /* background-attachment: fixed; */
+  /* background-size: cover; */
   opacity: 0.9;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  animation: slide 20s infinite;
 }
 
 .loginWrapper {
@@ -21,4 +25,40 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@keyframes slide{
+  0%{
+      background-image:url(./components/images/1.png);
+  }
+  25%{
+      background-image:url(./components/images/2.jpg);
+  }
+  50%{
+      background-image:url(./components/images/3.jpg);
+  }
+  75%{
+      background-image:url(./components/images/4.png);
+  }
+  100%{
+    background-image: url(./img/image2.png);
+  }
+}
+
+.form-btn{
+  /* background-color: #000000;
+  color: #FFFFFF;
+  border: none; */
+  background:#0984e3;
+  padding: 10px 24px;
+  color:white;
+  text-decoration:none;
+  font-size:18px;
+  border-radius: 5px;
+  border: none;
+}
+
+.form-btn:hover{
+  background:#0984ff;
+  border: 5px solid blue;
 }

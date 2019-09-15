@@ -11,7 +11,7 @@ import User from '../utils/API';
 // Our only css dependency
 import './normalize.css';
 import { isAbsolute } from 'path';
-
+var local = localStorage.getItem('user');
 class ReactSignupLoginComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -33,54 +33,60 @@ class ReactSignupLoginComponent extends React.Component {
     this.setState({ [key]: value });
   }
 
-  bubleUpSignup() {
-    //checks if the password and the confirm password match
-    if(this.state.password == this.state.passwordConfirmation){
-      // this.props.handleSignup({
-      //   username: this.state.username,
-      //   password: this.state.password
-      // });
-      
-      var data = {
-        username : this.state.username,
-        password : this.state.password
-      }
-      //must save to the database
-      User.findUser(data)
-        .then(response => {
-          response.data.username = this.props.handleSignup({
-            username: this.state.username
-          });
-          response.data.password = this.props.handleSignup({
+  bubleUpSignup(e) {
+    e.preventDefault();
+    
+    if((this.state.username !== '' && this.state.password !== '' ||
+        this.state.username !== null && this.state.password !== null)){
+          var newUser = {
+            username: this.state.username,
             password: this.state.password
-          });
-        });
-    }else{
-      alert('not match')
-    }
+          }
+
+          User.createUser(newUser)
+              .then(response => {
+                console.log('user is now registered')
+              });
+      }else{
+        console.log('invalid register')
+      }
     
   }
 
-  bubleUpLogin() {
-  //  var log = {
-  //     username: this.props.handleLogin({
-  //       username: this.state.username
-  //     }),
-  //     password: this.props.handleLogin({
-  //       password: this.state.password
-  //     })
-  //   };
-    var log = this.props.handleLogin({
-      username: this.state.username,
-      password: this.state.password
-      
-    })
+  bubleUpLogin(e) {
+    e.preventDefault();
 
-    User.userAuthentication(log)
-      .then(response => {
-        console.log(response)
-        response.redirect('/home');
-      });
+    if(this.state.username !== '' || this.state.password !== '' ||
+    this.state.username !== null || this.state.password !== null){
+      var access = {
+        username: this.state.username,
+        password: this.state.password
+      }
+
+      User.userAuthentication(access)
+          .then(response => {
+            console.log(response)
+            if(response.data.password == this.state.password){
+              // localStorage.setItem('user', JSON.stringify(response.data));
+              // local = JSON.parse(localStorage.getItem('user'));
+              console.log('user logs in');
+            }else{
+              console.log(`user doesn't exist`);
+            }
+            // if(response.data != false){
+              
+            //   // return response.JSON({msg: 'Login Success'})
+            //   console.log('user logs in successfully');
+            //   console.log(response);
+            //   // window.location.reload();
+            // }else{
+            //   // this.setState({msg: 'Invalid username/password'});
+            //   console.log('invalid login access')
+            // }
+          });
+    }else{
+      this.setState({msg: 'Please try again'});
+    }
   }
 
   bubleUpRecoverPassword() {
