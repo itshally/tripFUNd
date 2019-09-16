@@ -95,7 +95,6 @@ const Login = ({
         id="signup-button"
         className="form-btn"
         type="button"
-        href="/signup"
         style={Object.assign({}, localStyles.button, styles.button)}
         onClick={() => {
           handleShowSignup('isLogin', false);
@@ -103,7 +102,8 @@ const Login = ({
       >
         {goToSignupCustomLabel}
       </button>
-      <a href="/home"><input
+
+      <input
         id="submit-login"
         className="form-btn"
         name="submit-login"
@@ -111,7 +111,8 @@ const Login = ({
         type="submit"
         style={Object.assign({}, localStyles.button, styles.button)}
         onClick={handleLogin}
-      /></a>
+      />
+      
     </div>
   </section>
 );

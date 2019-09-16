@@ -8,5 +8,6 @@ router.route('/')
 
 router.route('/login')
 .post(userController.userAuthentication);
+// .get(userController.userAuthentication);
 
 module.exports = router;

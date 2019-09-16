@@ -6,38 +6,23 @@ import './shims.js';
 import 'core-js/es/array';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import ReactSignupLoginComponent from './components/ReactSignupLoginComponent';
-import Welcome from './components/Welcome/Welcome';
-
+import './routes';
 import './index.css';
 import tlogo from './assets/tlogo.png';
+import Welcome from './components/Welcome/Welcome';
+import App from './frontpage';
 
-const App = () => {
-  const signupWasClickedCallback = (data) => {
-    console.log(data);
-    alert('Signup callback, see log on the console to see the data.');
-  };
-  const loginWasClickedCallback = (data) => {
-    console.log(data);
-    alert('Login callback, see log on the console to see the data.');
-  };
-  const recoverPasswordWasClickedCallback = (data) => {
-    console.log(data);
-    alert('Recover password callback, see log on the console to see the data.');
-  };
-  return (
-<div className="loginWrapper">
-  {/* <Welcome></Welcome> */}
-      <ReactSignupLoginComponent
-        title="tripFUNd" logo={tlogo}
-        handleSignup={signupWasClickedCallback}
-        handleLogin={loginWasClickedCallback}
-        handleRecoverPassword={recoverPasswordWasClickedCallback}
-      />
-    </div>
-  );
-};
+const routing = (
+  
+  <Router>
+    <Route exact path="/" component={App} />
+      <Route path="/home" component={Welcome} />
+      {/* <Route path="/contact" component={Contact} /> */}
+  </Router>
+);
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
-export default App;
+ReactDOM.render(routing, document.getElementById('root'));
+
