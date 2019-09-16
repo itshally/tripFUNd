@@ -17,7 +17,7 @@ module.exports = {
           //      .catch(error => response.status(422).json(error));
 
           db.User
-               .findOne({username: request.body.username})
+               .findOne({username: request.body.username, password: request.body.password})
                .then(dbUser => {
                     if(dbUser) {
                         return response.json({msg: 'User is already existing.'})

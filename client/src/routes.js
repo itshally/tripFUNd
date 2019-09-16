@@ -12,13 +12,13 @@ import App from './index';
 
 const Routes = () => (
 <BrowserRouter >
-<Switch>
-<Route exact path="/" component={Welcome}/>
-<Route path="/home" component={Welcome}/>
-<Route path="/login" component={Login}/>
-<Route path="/Signup" component={Signup}/>
-<Route path="*" component={NotFound}/>
-</Switch>
+     <Switch>
+          <Route exact path="/" component={Welcome}/>
+          <Route path="/home" component={Welcome}/>
+          <Route path="/login" component={Login}/>
+          <Route path="/Signup" component={Signup}/>
+          <Route path="*" component={NotFound}/>
+     </Switch>
 </BrowserRouter>
 );
 export default Routes;

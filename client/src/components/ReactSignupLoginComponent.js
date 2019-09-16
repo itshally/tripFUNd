@@ -53,19 +53,28 @@ class ReactSignupLoginComponent extends React.Component {
             password: this.state.password
           }
 
+          console.log(newUser)
           //checks if user is already existing
-          User.findUser(newUser)
+          User.createUser(newUser)
               .then(response => {
-                if(response.data){
-                  console.log('user is existing already')
-                }else{
-                  //inserts the data to the database
-                  User.createUser(newUser)
-                      .then(response => {
-                        console.log('user is now registered');
-                        //must go to the login page form
-                      });
-                }
+                // for(var x in response.data){
+                  if(response.data == null){
+                    console.log('now registered')
+                  }else{
+                    console.log('existing')
+                  }
+                // }
+                // console.log(response.data)
+                // if(response.data){
+                //   console.log('user is existing already')
+                // }else{
+                //   //inserts the data to the database
+                //   User.createUser(newUser)
+                //       .then(response => {
+                //         console.log('user is now registered');
+                //         //must go to the login page form
+                //       });
+                // }
               });
           
         }
