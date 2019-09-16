@@ -1,16 +1,17 @@
 {
-  "name": "tripFUNd",
+  "name": "tripfund",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "proxy": "http://localhost:3000/",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
+    "start": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
+    "seed": "node scripts/seedDB.js",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,9 @@
     "url": "https://github.com/itshally/tripFUNd/issues"
   },
   "dependencies": {
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "config": "^3.2.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
