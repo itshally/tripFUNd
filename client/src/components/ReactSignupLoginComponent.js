@@ -4,15 +4,17 @@ import React from 'react';
 import Login from './Login';
 import Signup from './Signup';
 import RecoverPassword from './RecoverPassword';
-
+import { Redirect } from 'react-router-dom'
 import User from '../utils/API';
-
+import PageLinks from '../routes';
 
 // Our only css dependency
 import './normalize.css';
 import { isAbsolute } from 'path';
+import Routes from '../routes';
 var local = localStorage.getItem('user');
 class ReactSignupLoginComponent extends React.Component {
+  
   constructor(props) {
     super(props);
     this.updateState = this.updateState.bind(this);
@@ -26,6 +28,7 @@ class ReactSignupLoginComponent extends React.Component {
       username: '',
       password: '',
       passwordConfirmation: '',
+      redirectTo: null
     };
   }
 
@@ -33,25 +36,57 @@ class ReactSignupLoginComponent extends React.Component {
     this.setState({ [key]: value });
   }
 
+  //function for the signup button
   bubleUpSignup(e) {
     e.preventDefault();
     
-    if((this.state.username !== '' && this.state.password !== '' ||
-        this.state.username !== null && this.state.password !== null)){
+
+      if((this.state.username !== '' && this.state.password !== '' && this.state.passwordConfirmation !== '')){
+          
+        if(this.state.password < 8) {
+          alert('password must not be less than 8');
+        }else if(this.state.password !== this.state.passwordConfirmation){
+          alert('password did not match');
+        }else{
           var newUser = {
             username: this.state.username,
             password: this.state.password
           }
 
           User.createUser(newUser)
-              .then(response => {
-                console.log('user is now registered')
-              });
+          .then(response => { 
+            console.log(response); 
+            
+          });
+
+            User.findUser(newUser)
+                .then(response => {
+                  var data = response.data;
+                  var userNames = data.map(function (x) {
+                    return x.username;
+                  });
+      
+                  console.log(userNames);
+                  if(userNames.includes(newUser.username)){
+                    alert('user already existing')
+                  }
+                  else{
+                    alert('now registered')
+                  }
+                })
+        }
+          
       }else{
-        console.log('invalid register')
+        alert('invalid register')
       }
-    
-  }
+      
+
+      this.setState({
+        username: "",
+        password: "",
+        passwordConfirmation: ""
+      });
+}
 
   bubleUpLogin(e) {
     e.preventDefault();
@@ -66,27 +101,28 @@ class ReactSignupLoginComponent extends React.Component {
       User.userAuthentication(access)
           .then(response => {
             console.log(response)
-            if(response.data.password == this.state.password){
-              // localStorage.setItem('user', JSON.stringify(response.data));
-              // local = JSON.parse(localStorage.getItem('user'));
+            if(response.data.password === this.state.password){
+              localStorage.setItem('user', JSON.stringify(response.data));
+              local = JSON.parse(localStorage.getItem('user'));
               console.log('user logs in');
+              window.location.replace("/home");
+              this.setState({
+                username: "",
+                password: ""
+              });
             }else{
               console.log(`user doesn't exist`);
+              window.location.replace('/');
             }
-            // if(response.data != false){
-              
-            //   // return response.JSON({msg: 'Login Success'})
-            //   console.log('user logs in successfully');
-            //   console.log(response);
-            //   // window.location.reload();
-            // }else{
-            //   // this.setState({msg: 'Invalid username/password'});
-            //   console.log('invalid login access')
-            // }
+            
           });
     }else{
-      this.setState({msg: 'Please try again'});
+      // this.setState({msg: 'Please try again'});
+      console.log('please try again');
     }
+
+    //clears the input field after clicking the login button
+    
   }
 
   bubleUpRecoverPassword() {

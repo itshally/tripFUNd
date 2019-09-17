@@ -30,7 +30,7 @@ storiesOf('React signup login component', module)
       isLogin={false}
       handleSignup={(data) => {
         console.log(data);
-        alert('Signup callback, see log on the console to see the data.');
+        // alert('Signup callback, see log on the console to see the data.');
       }}
       handleLogin={() => {}}
       handleRecoverPassword={() => {}}
@@ -42,7 +42,7 @@ storiesOf('React signup login component', module)
       title="My awesome company"
       handleSignup={(data) => {
         console.log(data);
-        alert('Signup callback, see log on the console to see the data.');
+        // alert('Signup callback, see log on the console to see the data.');
       }}
     />
   ))
