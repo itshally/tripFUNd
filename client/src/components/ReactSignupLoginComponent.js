@@ -71,10 +71,11 @@ class ReactSignupLoginComponent extends React.Component {
                   }
                   else{
                     alert('now registered')
+                    data.push(newUser);
+                    console.log(data)
                   }
                 })
-        }
-          
+              }
       }else{
         alert('invalid register')
       }
