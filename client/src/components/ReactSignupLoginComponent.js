@@ -53,10 +53,10 @@ class ReactSignupLoginComponent extends React.Component {
             password: this.state.password
           }
 
-          User.createUser(newUser)
-          .then(response => { 
-            console.log(response); 
-          });
+          // User.createUser(newUser)
+          // .then(response => { 
+          //   console.log(response); 
+          // });
 
             User.findUser(newUser)
                 .then(response => {
