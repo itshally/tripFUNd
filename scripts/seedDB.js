@@ -16,13 +16,11 @@ const userSeed = [
 
 
 db.User
-  .remove({})
-  .then(() => db.User.collection.insertMany(userSeed))
+  .find(userSeed)
   .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
+    if(!data){ db.User.create(userSeed).then( () => process.exit() ); }
   })
-  .catch(err => {
-    console.error(err);
+  .catch(error => {
+    console.error(error);
     process.exit(1);
   });
