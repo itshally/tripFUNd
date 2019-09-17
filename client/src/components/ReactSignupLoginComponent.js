@@ -56,7 +56,6 @@ class ReactSignupLoginComponent extends React.Component {
           User.createUser(newUser)
           .then(response => { 
             console.log(response); 
-            
           });
 
             User.findUser(newUser)
