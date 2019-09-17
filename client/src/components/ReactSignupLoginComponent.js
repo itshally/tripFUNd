@@ -44,52 +44,48 @@ class ReactSignupLoginComponent extends React.Component {
       if((this.state.username !== '' && this.state.password !== '' && this.state.passwordConfirmation !== '')){
           
         if(this.state.password < 8) {
-          console.log('password must not be less than 8');
+          alert('password must not be less than 8');
         }else if(this.state.password !== this.state.passwordConfirmation){
-          console.log('password did not match');
+          alert('password did not match');
         }else{
           var newUser = {
             username: this.state.username,
             password: this.state.password
           }
 
-          console.log(newUser)
-          //checks if user is already existing
           User.createUser(newUser)
-              .then(response => {
-                // for(var x in response.data){
-                  if(response.data == null){
-                    console.log('now registered')
-                  }else{
-                    console.log('existing')
+          .then(response => { 
+            console.log(response); 
+            
+          });
+
+            User.findUser(newUser)
+                .then(response => {
+                  var data = response.data;
+                  var userNames = data.map(function (x) {
+                    return x.username;
+                  });
+      
+                  console.log(userNames);
+                  if(userNames.includes(newUser.username)){
+                    alert('user already existing')
                   }
-                // }
-                // console.log(response.data)
-                // if(response.data){
-                //   console.log('user is existing already')
-                // }else{
-                //   //inserts the data to the database
-                //   User.createUser(newUser)
-                //       .then(response => {
-                //         console.log('user is now registered');
-                //         //must go to the login page form
-                //       });
-                // }
-              });
-          
+                  else{
+                    alert('now registered')
+                  }
+                })
         }
           
       }else{
-        console.log('invalid register')
+        alert('invalid register')
       }
       
 
-    //clears the input field after clicking the signup button
-    this.setState({
-      username: "",
-      password: "",
-      passwordConfirmation: ""
-    });
+      this.setState({
+        username: "",
+        password: "",
+        passwordConfirmation: ""
+      });
 }
 
   bubleUpLogin(e) {
@@ -118,16 +114,7 @@ class ReactSignupLoginComponent extends React.Component {
               console.log(`user doesn't exist`);
               window.location.replace('/');
             }
-            // if(response.data != false){
-              
-            //   // return response.JSON({msg: 'Login Success'})
-            //   console.log('user logs in successfully');
-            //   console.log(response);
-            //   // window.location.reload();
-            // }else{
-            //   // this.setState({msg: 'Invalid username/password'});
-            //   console.log('invalid login access')
-            // }
+            
           });
     }else{
       // this.setState({msg: 'Please try again'});
