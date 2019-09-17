@@ -71,7 +71,8 @@ class ReactSignupLoginComponent extends React.Component {
                   }
                   else{
                     alert('now registered')
-                    data.push(newUser);
+                    User.createUser(newUser)
+                         .then(response => { console.log(newUser)});
                     console.log(data)
                   }
                 })
