@@ -6,13 +6,13 @@ module.exports = {
      createUser: (request, response) => {
 
           db.User
-               .findOne({username: request.body.username, password: request.body.password})
+               .findOne({'username': request.body.username, 'password': request.body.password})
                .then(dbUser => {
                     if(dbUser) {
                         return response.json({msg: 'User is already existing.'})
                     } else{
                          return db.User
-                              .create({username: request.body.username, password: request.body.password})
+                              .create({'username': request.body.username, 'password': request.body.password})
                               .then(dbUser => response.json(dbUser))
                               .catch(error => response.status(422).json(error));
                          }
