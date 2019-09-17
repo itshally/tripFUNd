@@ -102,16 +102,16 @@ class ReactSignupLoginComponent extends React.Component {
           .then(response => {
             console.log(response)
             if(response.data.password === this.state.password){
-              localStorage.setItem('user', JSON.stringify(response.data));
-              local = JSON.parse(localStorage.getItem('user'));
-              console.log('user logs in');
+              // localStorage.setItem('user', JSON.stringify(response.data));
+              // local = JSON.parse(localStorage.getItem('user'));
+              alert('user logs in');
               window.location.replace("/home");
               this.setState({
                 username: "",
                 password: ""
               });
             }else{
-              console.log(`user doesn't exist`);
+              alert(`user doesn't exist`);
               window.location.replace('/');
             }
             
