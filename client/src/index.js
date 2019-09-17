@@ -13,12 +13,14 @@ import './index.css';
 import tlogo from './assets/tlogo.png';
 import Welcome from './components/Welcome/Welcome';
 import App from './frontpage';
+import CalculateForm from './components/CalculateForm/CalculateForm';
 
 const routing = (
   
   <Router>
     <Route exact path="/" component={App} />
       <Route path="/home" component={Welcome} />
+      <Route path="/CalculateForm" component={CalculateForm}/>
       {/* <Route path="/contact" component={Contact} /> */}
   </Router>
 );

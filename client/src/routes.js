@@ -8,6 +8,7 @@ import Login from '././components/Login/Login';
 import Signup from '././components/Signup/Signup';
 import NotFound from '././components/NotFound/NotFound';
 import App from './index';
+import CalculateForm from './components/CalculateForm/CalculateForm';
 
 
 const Routes = () => (
@@ -18,6 +19,7 @@ const Routes = () => (
           <Route path="/login" component={Login}/>
           <Route path="/Signup" component={Signup}/>
           <Route path="*" component={NotFound}/>
+          {/* <Route path="/CalculateForm" component={CalculateForm}/> */}
      </Switch>
 </BrowserRouter>
 );
