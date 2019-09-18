@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { InputGroup, Container  } from 'react-bootstrap';
 import { FormControl  } from 'react-bootstrap';
 import { Button   } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../CalculateForm/CalculateForm.css"
+import './CalculateForm.css';
 
 class CalculateForm extends Component {
     state = {
@@ -20,7 +20,8 @@ class CalculateForm extends Component {
       };
 render() {
 return (
-<div>
+    <div>
+        <Container><h1>Create Trip</h1>
     <form>
         <p>FROM
         <DatePicker
@@ -59,10 +60,11 @@ return (
     <div>
     <br></br>
     <br></br>
-    <Button variant="outline-primary">Calculate</Button>
+    <Button variant="primary" size="lg">Calculate</Button>
     <br></br>
     <br></br>
     </div>
+    </Container>
 </div>
 );
 }
